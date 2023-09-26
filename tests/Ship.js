@@ -11,7 +11,7 @@ class Ship {
         }
     }
     isSunk() {
-        //isSunk
+        return this.numberOfTimesHit >= this.length ? true : false;
     }
 }
 module.exports = Ship;

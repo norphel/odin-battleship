@@ -49,3 +49,31 @@ describe('test hit method', () => {
         expect(ship.sunk).toBe(true)
     })
 })
+
+describe('test isSunk method', () => {
+    test('isSunk should return false initially', () => {
+        expect(ship.isSunk()).toBe(false)
+    })
+    test('isSunk should return false when numberOfTimesHit is less than length of ship', () => {
+        ship.hit();
+        ship.hit();
+        expect(ship.isSunk()).toBe(false)
+    })
+    test('isSunk should return true when numberOfTimesHit is equal to length of ship', () => {
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        expect(ship.isSunk()).toBe(true)
+    })
+    test('isSunk should return true when numberOfTimesHit is greater than length of ship', () => {
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        expect(ship.isSunk()).toBe(true)
+    })
+})
