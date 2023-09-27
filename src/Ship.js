@@ -16,6 +16,9 @@ class Ship {
         this.getNumberOfHits = function() {
             return _numberOfTimesHit;
         };
+        this.getLength = function() {
+            return _length;
+        }
     }
 }
 module.exports = Ship;
