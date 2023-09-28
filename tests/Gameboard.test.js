@@ -62,7 +62,7 @@ describe('test placeShip method', () => {
         expect(() => gameboard.placeShip(carrier, 0, 8, true)).toThrow('Out of bounds');
         expect(() => gameboard.placeShip(carrier, 0, 7, true)).toThrow('Out of bounds');
         expect(() => gameboard.placeShip(carrier, 0, 6, true)).toThrow('Out of bounds');
-        // expect(() => gameboard.placeShip(carrier, 0, 5, true)).toThrow('Out of bounds'); //should fail
+        expect(() => gameboard.placeShip(carrier, 0, 5, true)).not.toThrow('Out of bounds'); 
     })
 
     test('test placeShip for out of bounds for vertical orientation', () => {
@@ -74,7 +74,7 @@ describe('test placeShip method', () => {
         expect(() => gameboard.placeShip(carrier, 8, 0, false)).toThrow('Out of bounds');
         expect(() => gameboard.placeShip(carrier, 7, 0, false)).toThrow('Out of bounds');
         expect(() => gameboard.placeShip(carrier, 6, 0, false)).toThrow('Out of bounds');
-        // expect(() => gameboard.placeShip(carrier, 5, 0, false)).toThrow('Out of bounds'); //should fail
+        expect(() => gameboard.placeShip(carrier, 5, 0, false)).not.toThrow('Out of bounds'); 
     })
 })
 
