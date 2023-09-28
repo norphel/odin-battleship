@@ -124,4 +124,9 @@ describe('test receiveAttack method', () => {
 
         expect(carrier.isSunk()).toBe(true);
     })
+
+    test('receiveAttack should not allow multiple attacks on same spot', () => {
+        gameboard.receiveAttack(0, 0);
+        expect(() => gameboard.receiveAttack(0, 0)).toThrow('Multiple attacks not allowed');
+    })
 })
