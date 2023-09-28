@@ -72,13 +72,16 @@ class Gameboard {
 
         this.receiveAttack = function(row, col) {
             if (this.isAttackMissed(row, col)) {
-                return 'Missed';
+                return _board[row][col];
+            } else {
+                const shipAttacked = _board[row][col];
+                shipAttacked.hit();
             }
         };
 
         this.isAttackMissed = function(row, col) {
             if (_board[row][col] === null) {
-                _board[row][col] = 'missed';
+                _board[row][col] = 'Missed';
                 return true;
             }
             return false;
