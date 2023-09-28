@@ -48,4 +48,17 @@ describe('test placeShip method', () => {
         expect(gameboard.getShipAt(0, 4)).toBe(null);
         expect(gameboard.getShipAt(1, 0)).toBe(null);
     })
+
+    test('placeShip should throw error when ships overlap', () => {
+        const carrier = new Ship(5);
+        const submarine = new Ship(3);
+
+        gameboard.placeShip(carrier, 0, 0, false); //5 rows of first column is now occupied
+        expect(() => gameboard.placeShip(submarine, 0, 0, true)).toThrow();
+        expect(() => gameboard.placeShip(submarine, 1, 0, true)).toThrow();
+        expect(() => gameboard.placeShip(submarine, 2, 0, true)).toThrow();
+        expect(() => gameboard.placeShip(submarine, 3, 0, true)).toThrow();
+        expect(() => gameboard.placeShip(submarine, 4, 0, true)).toThrow();
+        // expect(() => gameboard.placeShip(submarine, 5, 0, true)).toThrow(); //should fail
+    })
 })
