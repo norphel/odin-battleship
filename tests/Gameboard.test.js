@@ -130,3 +130,29 @@ describe('test receiveAttack method', () => {
         expect(() => gameboard.receiveAttack(0, 0)).toThrow('Multiple attacks not allowed');
     })
 })
+
+describe('test for allShipsSunk', () => {
+    test('return true when all ships are sunk', () => {
+        const carrier = new Ship(5);
+        const patrolBoat = new Ship(2);
+
+        gameboard.placeShip(carrier, 8, 1, true);
+        gameboard.placeShip(patrolBoat, 0, 9, false);
+
+        expect(gameboard.allShipSunk()).toBe(false);
+
+        gameboard.receiveAttack(8,1);
+        gameboard.receiveAttack(8,2);
+        gameboard.receiveAttack(8,3);
+        gameboard.receiveAttack(8,4);
+        gameboard.receiveAttack(8,5);
+
+        expect(gameboard.allShipSunk()).toBe(false);
+
+        gameboard.receiveAttack(0, 0); //Missed
+        gameboard.receiveAttack(0,9);
+        gameboard.receiveAttack(1,9);
+
+        expect(gameboard.allShipSunk()).toBe(true);
+    })
+})
