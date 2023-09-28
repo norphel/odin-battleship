@@ -71,11 +71,15 @@ class Gameboard {
         };
 
         this.receiveAttack = function(row, col) {
+            if (this.isAlreadyAttacked(row, col)) {
+                throw new Error('Multiple attacks not allowed')
+            }
             if (this.isAttackMissed(row, col)) {
                 return _board[row][col];
             } else {
                 const shipAttacked = _board[row][col];
                 shipAttacked.hit();
+                _board[row][col] = 'Attacked';
             }
         };
 
@@ -84,6 +88,13 @@ class Gameboard {
                 _board[row][col] = 'Missed';
                 return true;
             }
+            return false;
+        };
+
+        this.isAlreadyAttacked = function(row, col) {
+            if (_board[row][col] === 'Missed' || _board[row][col] === 'Attacked') {
+                return true;
+            } 
             return false;
         }
     }
