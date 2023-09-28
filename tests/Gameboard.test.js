@@ -77,3 +77,16 @@ describe('test placeShip method', () => {
         // expect(() => gameboard.placeShip(carrier, 5, 0, false)).toThrow('Out of bounds'); //should fail
     })
 })
+
+describe('test receiveAttack method', () => {
+    test('attack missed', () => {
+        
+        const patrolBoat = new Ship(2);
+        gameboard.placeShip(patrolBoat, 0, 0, true);
+
+        expect(gameboard.receiveAttack(0, 0)).not.toBe('Missed');
+        expect(gameboard.receiveAttack(0, 1)).not.toBe('Missed');
+        expect(gameboard.receiveAttack(0,2)).toBe('Missed');
+        expect(gameboard.receiveAttack(1, 0)).toBe('Missed');
+    })
+})
