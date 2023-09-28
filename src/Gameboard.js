@@ -70,6 +70,19 @@ class Gameboard {
             return false;
         };
 
+        this.receiveAttack = function(row, col) {
+            if (this.isAttackMissed(row, col)) {
+                return 'Missed';
+            }
+        };
+
+        this.isAttackMissed = function(row, col) {
+            if (_board[row][col] === null) {
+                _board[row][col] = 'missed';
+                return true;
+            }
+            return false;
+        }
     }
 }
 module.exports = Gameboard;
