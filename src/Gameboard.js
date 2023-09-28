@@ -96,6 +96,21 @@ class Gameboard {
                 return true;
             } 
             return false;
+        };
+
+        this.allShipSunk = function() {
+            for (let i = 0; i < _board.length; i++) {
+                for (let j = 0; j < _board.length; j++) {
+                    if (_board[i][j] !== null) {
+                        if (_board[i][j] !== 'Missed') {
+                            if (_board[i][j] !== 'Attacked') {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 }
