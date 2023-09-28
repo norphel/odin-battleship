@@ -89,4 +89,23 @@ describe('test receiveAttack method', () => {
         expect(gameboard.receiveAttack(0,2)).toBe('Missed');
         expect(gameboard.receiveAttack(1, 0)).toBe('Missed');
     })
+
+    test('receiveAttack sends the hit function to the correct ship', () => {
+        const battleship = new Ship(4);
+        const submarine = new Ship(3);
+
+        gameboard.placeShip(battleship, 1, 1, false);
+        gameboard.placeShip(submarine, 8, 6, true);
+
+        expect(battleship.getNumberOfHits()).toBe(0);
+        expect(submarine.getNumberOfHits()).toBe(0);
+
+        gameboard.receiveAttack(1, 1);
+        gameboard.receiveAttack(4, 1);
+        gameboard.receiveAttack(8, 7);
+        gameboard.receiveAttack(3, 3); //missed
+    
+        expect(battleship.getNumberOfHits()).toBe(2);
+        expect(submarine.getNumberOfHits()).toBe(1);
+    })
 })
