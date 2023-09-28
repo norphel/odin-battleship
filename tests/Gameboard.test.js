@@ -108,4 +108,20 @@ describe('test receiveAttack method', () => {
         expect(battleship.getNumberOfHits()).toBe(2);
         expect(submarine.getNumberOfHits()).toBe(1);
     })
+
+    test('test receiveAttack for when ship is sunk', () => {
+        const carrier = new Ship(5);
+
+        gameboard.placeShip(carrier, 0, 0, true);
+        
+        expect(carrier.isSunk()).toBe(false);
+
+        gameboard.receiveAttack(0, 0);
+        gameboard.receiveAttack(0, 1);
+        gameboard.receiveAttack(0, 2);
+        gameboard.receiveAttack(0, 3);
+        gameboard.receiveAttack(0, 4);
+
+        expect(carrier.isSunk()).toBe(true);
+    })
 })
