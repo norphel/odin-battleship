@@ -9,6 +9,10 @@ class Gameboard {
         this.placeShip = function(ship, row, col, isHorizontal) {
             const shipLength = ship.getLength();
 
+            if (this.isOutOfBounds(ship, row, col, isHorizontal)) {
+                throw new Error('Out of bounds');
+            }
+
             if (this.isOverlapping(ship, row, col, isHorizontal)) {
                 throw new Error('Overlapping');
             }
@@ -46,7 +50,25 @@ class Gameboard {
             }
             
             return false; 
-        }
+        };
+
+        this.isOutOfBounds = function(ship, row, col, isHorizontal) {
+            const shipLength = ship.getLength();
+
+            if (col < 0 || col >= _board.length || row < 0 || row >= _board.length) {
+                return true;
+            }
+            if(isHorizontal) {
+                if (col + shipLength > _board.length) {
+                    return true;
+                }
+            } else {
+                if (row + shipLength > _board.length) {
+                    return true;
+                }
+            }
+            return false;
+        };
 
     }
 }
