@@ -7,15 +7,6 @@ beforeEach(() => {
 })
 
 describe('test placeShip method', () => {
-    // test('placeShip should place a ship at specific coordinates', () => {
-    //     const ship = new Ship(4);
-    //     const row = 0;
-    //     const col = 0;
-
-    //     gameboard.placeShip(ship, row, col);
-    //     console.log(gameboard.getBoard())
-    //     expect(gameboard.getShipAt(0, 0)).toBe(ship);
-    // })
 
     test('placeShip should place a ship at specific coordinates and should consider orientation', () => {
         const ship = new Ship(4);
@@ -60,5 +51,29 @@ describe('test placeShip method', () => {
         expect(() => gameboard.placeShip(submarine, 3, 0, true)).toThrow();
         expect(() => gameboard.placeShip(submarine, 4, 0, true)).toThrow();
         // expect(() => gameboard.placeShip(submarine, 5, 0, true)).toThrow(); //should fail
+    })
+
+    test('test placeShip for out of bounds for horizontal orientation', () => {
+        const carrier = new Ship(5);
+
+        expect(() => gameboard.placeShip(carrier, 0, -1, true)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 0, 10, true)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 0, 9, true)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 0, 8, true)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 0, 7, true)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 0, 6, true)).toThrow('Out of bounds');
+        // expect(() => gameboard.placeShip(carrier, 0, 5, true)).toThrow('Out of bounds'); //should fail
+    })
+
+    test('test placeShip for out of bounds for vertical orientation', () => {
+        const carrier = new Ship(5);
+
+        expect(() => gameboard.placeShip(carrier, -1, 0, false)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 10, 0, false)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 9, 0, false)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 8, 0, false)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 7, 0, false)).toThrow('Out of bounds');
+        expect(() => gameboard.placeShip(carrier, 6, 0, false)).toThrow('Out of bounds');
+        // expect(() => gameboard.placeShip(carrier, 5, 0, false)).toThrow('Out of bounds'); //should fail
     })
 })
