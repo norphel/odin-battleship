@@ -9,11 +9,11 @@ class Gameboard {
         this.placeShip = function(ship, row, col, isHorizontal) {
             const shipLength = ship.getLength();
 
-            if (this.isOutOfBounds(ship, row, col, isHorizontal)) {
+            if (_isOutOfBounds(ship, row, col, isHorizontal)) {
                 throw new Error('Out of bounds');
             }
 
-            if (this.isOverlapping(ship, row, col, isHorizontal)) {
+            if (_isOverlapping(ship, row, col, isHorizontal)) {
                 throw new Error('Overlapping');
             }
 
@@ -32,7 +32,7 @@ class Gameboard {
             return _board[row][col];
         };
 
-        this.isOverlapping = function(ship, row, col, isHorizontal) {
+        let _isOverlapping = function(ship, row, col, isHorizontal) {
             const shipLength = ship.getLength();
             
             if (isHorizontal) {
@@ -52,7 +52,7 @@ class Gameboard {
             return false; 
         };
 
-        this.isOutOfBounds = function(ship, row, col, isHorizontal) {
+        let _isOutOfBounds = function(ship, row, col, isHorizontal) {
             const shipLength = ship.getLength();
 
             if (col < 0 || col >= _board.length || row < 0 || row >= _board.length) {
@@ -71,10 +71,10 @@ class Gameboard {
         };
 
         this.receiveAttack = function(row, col) {
-            if (this.isAlreadyAttacked(row, col)) {
+            if (_isAlreadyAttacked(row, col)) {
                 throw new Error('Multiple attacks not allowed')
             }
-            if (this.isAttackMissed(row, col)) {
+            if (_isAttackMissed(row, col)) {
                 return _board[row][col];
             } else {
                 const shipAttacked = _board[row][col];
@@ -83,7 +83,7 @@ class Gameboard {
             }
         };
 
-        this.isAttackMissed = function(row, col) {
+        let _isAttackMissed = function(row, col) {
             if (_board[row][col] === null) {
                 _board[row][col] = 'Missed';
                 return true;
@@ -91,7 +91,7 @@ class Gameboard {
             return false;
         };
 
-        this.isAlreadyAttacked = function(row, col) {
+        let _isAlreadyAttacked = function(row, col) {
             if (_board[row][col] === 'Missed' || _board[row][col] === 'Attacked') {
                 return true;
             } 
